@@ -1,12 +1,17 @@
 package playfair
 
 import (
+	"regexp"
 	"strings"
 )
 
 func createLetterPairs(s string) [][2]string {
+	// Sanitize the string by removing non uppecase letters
 	s = strings.ToUpper(s)
-	strArr := splitStr(s)
+	invaldCharRegex := regexp.MustCompile("[^A-Z]")
+	s = string(invaldCharRegex.ReplaceAll([]byte(s), []byte{}))
+
+	strArr := strings.Split(s, "")
 
 	var lp [][2]string
 	for {

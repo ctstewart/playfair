@@ -4,13 +4,20 @@ import (
 	"fmt"
 
 	"github.com/ctstewart/playfair/playfair"
+	"github.com/pkg/errors"
 )
 
-func Example() {
+func Example() error {
 	message := "lordgranvillesletter"
 	key := "palmerston"
-	encrypted := playfair.Encrypt(message, key)
-	decrypted := playfair.Decrypt(encrypted, key)
+	encrypted, err := playfair.Encrypt(message, key)
+	if err != nil {
+		return errors.Wrap(err, "Encrypting example")
+	}
+	decrypted, err := playfair.Decrypt(encrypted, key)
+	if err != nil {
+		return errors.Wrap(err, "Decrypting example")
+	}
 
 	fmt.Println()
 	fmt.Println("--- Example ---")
@@ -19,4 +26,5 @@ func Example() {
 	fmt.Printf("%12s %s\n", "Key:", key)
 	fmt.Printf("%12s %s\n", "Encrypted:", encrypted)
 	fmt.Printf("%12s %s\n", "Decrypted:", decrypted)
+	return nil
 }

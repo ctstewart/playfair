@@ -1,8 +1,13 @@
 package playfair
 
-func Encrypt(message string, key string) string {
+import "github.com/pkg/errors"
+
+func Encrypt(message string, key string) (string, error) {
 	var ans string
-	keyTable := createStrArr(key)
+	keyTable, err := convertKeyToStringArray(key)
+	if err != nil {
+		return "", errors.Wrap(err, "Generaing keytable")
+	}
 	letterPairs := createLetterPairs(message)
 	for _, pair := range letterPairs {
 		c1, c2 := getCoordFromLetter(pair[0], keyTable), getCoordFromLetter(pair[1], keyTable)
@@ -21,5 +26,5 @@ func Encrypt(message string, key string) string {
 		ans += getLetterFromCoord(c1[0], c1[1], keyTable)
 		ans += getLetterFromCoord(c2[0], c2[1], keyTable)
 	}
-	return ans
+	return ans, nil
 }

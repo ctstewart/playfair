@@ -6,7 +6,10 @@ import (
 )
 
 func TestGetCoordFromLetter(t *testing.T) {
-	strArr := createStrArr("PALMERSTON")
+	strArr, err := convertKeyToStringArray("PALMERSTON")
+	if err != nil {
+		t.Fatalf("Got error: %s", err)
+	}
 	type testStruct struct {
 		letter string
 		x      int

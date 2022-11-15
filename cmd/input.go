@@ -1,13 +1,13 @@
 package main
 
 import (
-	"errors"
 	"fmt"
 
 	"github.com/ctstewart/playfair/playfair"
+	"github.com/pkg/errors"
 )
 
-func Input() error {
+func Input() (err error) {
 	var eord string
 	var message string
 	var key string
@@ -30,11 +30,17 @@ func Input() error {
 	if eord == "e" {
 		fmt.Println("Please enter the message you would like to encrypt:")
 		fmt.Scanln(&message)
-		ans = playfair.Encrypt(message, key)
+		ans, err = playfair.Encrypt(message, key)
+		if err != nil {
+			return errors.Wrap(err, "Encrypting message")
+		}
 	} else if eord == "d" {
 		fmt.Println("Please enter the message you would like to decrypt:")
 		fmt.Scanln(&message)
-		ans = playfair.Decrypt(message, key)
+		ans, err = playfair.Decrypt(message, key)
+		if err != nil {
+			return errors.Wrap(err, "Decrypting message")
+		}
 	}
 
 	fmt.Println(ans)

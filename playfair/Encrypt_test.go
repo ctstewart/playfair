@@ -8,7 +8,10 @@ func TestEncrypt(t *testing.T) {
 	key := "palmerston"
 
 	want := "LE"
-	got := Encrypt(message, key)
+	got, err := Encrypt(message, key)
+	if err != nil {
+		t.Fatalf("Got error: %s", err)
+	}
 
 	if want != got {
 		t.Fatalf("\n%10s %v\n%10s %v", "Expected:", want, "Got:", got)
@@ -19,7 +22,10 @@ func TestEncrypt(t *testing.T) {
 	key = "palmerston"
 
 	want = "RP"
-	got = Encrypt(message, key)
+	got, err = Encrypt(message, key)
+	if err != nil {
+		t.Fatalf("Got error: %s", err)
+	}
 
 	if want != got {
 		t.Fatalf("\n%10s %v\n%10s %v", "Expected:", want, "Got:", got)
@@ -30,7 +36,10 @@ func TestEncrypt(t *testing.T) {
 	key = "palmerston"
 
 	want = "MT"
-	got = Encrypt(message, key)
+	got, err = Encrypt(message, key)
+	if err != nil {
+		t.Fatalf("Got error: %s", err)
+	}
 
 	if want != got {
 		t.Fatalf("\n%10s %v\n%10s %v", "Expected:", want, "Got:", got)
@@ -41,7 +50,10 @@ func TestEncrypt(t *testing.T) {
 	key = "palmerston"
 
 	want = "MTTBBNESWHTLMPTALNNLNV"
-	got = Encrypt(message, key)
+	got, err = Encrypt(message, key)
+	if err != nil {
+		t.Fatalf("Got error: %s", err)
+	}
 
 	if want != got {
 		t.Fatalf("\n%10s %v\n%10s %v", "Expected:", want, "Got:", got)

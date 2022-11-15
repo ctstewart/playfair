@@ -1,10 +1,17 @@
 package playfair
 
-import "strings"
+import (
+	"strings"
 
-func Decrypt(message string, key string) string {
+	"github.com/pkg/errors"
+)
+
+func Decrypt(message string, key string) (string, error) {
 	var ans string
-	keyTable := createStrArr(key)
+	keyTable, err := convertKeyToStringArray(key)
+	if err != nil {
+		return "", errors.Wrap(err, "creating string array from key")
+	}
 	letterPairs := createLetterPairs(message)
 	for _, pair := range letterPairs {
 		c1, c2 := getCoordFromLetter(pair[0], keyTable), getCoordFromLetter(pair[1], keyTable)
@@ -37,5 +44,5 @@ func Decrypt(message string, key string) string {
 		ans += getLetterFromCoord(c1[0], c1[1], keyTable)
 		ans += getLetterFromCoord(c2[0], c2[1], keyTable)
 	}
-	return strings.ToLower(ans)
+	return strings.ToLower(ans), nil
 }

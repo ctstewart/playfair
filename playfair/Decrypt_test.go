@@ -8,7 +8,10 @@ func TestDecrypt(t *testing.T) {
 	key := "palmerston"
 
 	want := "am"
-	got := Decrypt(message, key)
+	got, err := Decrypt(message, key)
+	if err != nil {
+		t.Fatalf("Got error: %s", err)
+	}
 
 	if want != got {
 		t.Fatalf("\n%10s %v\n%10s %v", "Expected:", want, "Got:", got)
@@ -19,7 +22,10 @@ func TestDecrypt(t *testing.T) {
 	key = "palmerston"
 
 	want = "pv"
-	got = Decrypt(message, key)
+	got, err = Decrypt(message, key)
+	if err != nil {
+		t.Fatalf("Got error: %s", err)
+	}
 
 	if want != got {
 		t.Fatalf("\n%10s %v\n%10s %v", "Expected:", want, "Got:", got)
@@ -30,7 +36,10 @@ func TestDecrypt(t *testing.T) {
 	key = "palmerston"
 
 	want = "lo"
-	got = Decrypt(message, key)
+	got, err = Decrypt(message, key)
+	if err != nil {
+		t.Fatalf("Got error: %s", err)
+	}
 
 	if want != got {
 		t.Fatalf("\n%10s %v\n%10s %v", "Expected:", want, "Got:", got)
@@ -41,7 +50,10 @@ func TestDecrypt(t *testing.T) {
 	key = "palmerston"
 
 	want = "lordgranvilxlesletterz"
-	got = Decrypt(message, key)
+	got, err = Decrypt(message, key)
+	if err != nil {
+		t.Fatalf("Got error: %s", err)
+	}
 
 	if want != got {
 		t.Fatalf("\n%10s %v\n%10s %v", "Expected:", want, "Got:", got)
